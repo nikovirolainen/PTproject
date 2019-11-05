@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import Addcustomer from "./Addcustomer";
+import Calendar from "./Calendar";
 
 const Customers = () => {
 	const [customers, setCustomers] = useState([]);
@@ -31,6 +33,8 @@ const Customers = () => {
 				.catch((err) => console.error(err));
 		}
 	};
+
+	const goToCalender = () => {};
 
 	const saveCustomer = (newCustomer) => {
 		fetch("https://carstockrest.herokuapp.com/api/customers", {
@@ -82,6 +86,16 @@ const Customers = () => {
 					Delete
 				</Button>
 			)
+		},
+		{
+			accessor: "_links.self.href",
+			filterable: true,
+			sortable: true,
+			Cell: ({ value }) => (
+				<Button size="small" color="primary" onClick={() => goToCalender(value)}>
+					Add training
+				</Button>
+			)
 		}
 	];
 
@@ -90,6 +104,16 @@ const Customers = () => {
 			<Addcustomer saveCustomer={saveCustomer} />
 			<ReactTable filterable={true} columns={columns} data={customers} />
 			<Snackbar open={open} autoHideDuration={3000} onClose={handleClose} message="Car deleted" />
+			<Router>
+				<div>
+					<Route exact path="/">
+						<Calendar />
+					</Route>
+					<Route path="/news">
+						<Calendar />
+					</Route>
+				</div>
+			</Router>
 		</div>
 	);
 };
