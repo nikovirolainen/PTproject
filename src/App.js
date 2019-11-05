@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import RestoreIcon from "@material-ui/icons/Restore";
+import HomeIcon from "@material-ui/icons/Home";
 import FolderIcon from "@material-ui/icons/Folder";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import EventIcon from "@material-ui/icons/Event";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import "./App.css";
 import Customers from "./Customers";
@@ -12,7 +12,9 @@ import Calendar from "./Calendar";
 
 const useStyles = makeStyles({
 	root: {
-		width: 500
+		width: 500,
+		marginLeft: 1000,
+		marginRight: 1000
 	}
 });
 
@@ -29,8 +31,8 @@ const App = () => {
 				<Customers />
 			</div>
 			<BottomNavigation value={value} onChange={handleChange} className={classes.root}>
-				<BottomNavigationAction label="Recents" value="recents" icon={<RestoreIcon />} />
-				<BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} />
+				<BottomNavigationAction label="Home" value="home" icon={<HomeIcon />} />
+				<BottomNavigationAction label="Calendar" value="calendar" icon={<EventIcon />} />
 				<BottomNavigationAction label="Nearby" value="nearby" icon={<LocationOnIcon />} />
 				<BottomNavigationAction label="Folder" value="folder" icon={<FolderIcon />} />
 			</BottomNavigation>
