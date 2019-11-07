@@ -38,7 +38,7 @@ const Addcustomer = (props) => {
 	};
 
 	return (
-		<div style={{ margin: 10 }}>
+		<div style={{ margin: 20 }}>
 			<Button variant="outlined" color="primary" onClick={handleClickOpen}>
 				Add customer
 			</Button>

@@ -1,43 +1,62 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import HomeIcon from "@material-ui/icons/Home";
-import FolderIcon from "@material-ui/icons/Folder";
-import EventIcon from "@material-ui/icons/Event";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
+import FitnessCenterIcon from "@material-ui/icons/FitnessCenter";
+import TodayIcon from "@material-ui/icons/Today";
+import { Route, BrowserRouter, Switch, Link } from "react-router-dom";
 import "./App.css";
 import Customers from "./Customers";
 import Calendar from "./Calendar";
-
-const useStyles = makeStyles({
-	root: {
-		width: 500,
-		marginLeft: 1000,
-		marginRight: 1000
-	}
-});
 
 const App = () => {
 	const classes = useStyles();
 	const [value, setValue] = React.useState(0);
 
-	const handleChange = (event, newValue) => {
-		setValue(newValue);
-	};
 	return (
 		<div>
-			<div>
-				<Customers />
-			</div>
-			<BottomNavigation value={value} onChange={handleChange} className={classes.root}>
-				<BottomNavigationAction label="Home" value="home" icon={<HomeIcon />} />
-				<BottomNavigationAction label="Calendar" value="calendar" icon={<EventIcon />} />
-				<BottomNavigationAction label="Nearby" value="nearby" icon={<LocationOnIcon />} />
-				<BottomNavigationAction label="Folder" value="folder" icon={<FolderIcon />} />
-			</BottomNavigation>
+			<BrowserRouter>
+				<div>
+					<div style={{ textAlign: "center", marginTop: 1 }}>
+						<Switch>
+							<Route path="/customers" component={Customers} />
+							<Route path="/calendar" component={Calendar} />
+							<Route render={() => <h1>Page not found</h1>} />
+						</Switch>
+					</div>
+					<div>
+						<BottomNavigation
+							value={value}
+							onChange={(event, newValue) => {
+								setValue(newValue);
+							}}
+							showLabels
+							className={classes.root}
+						>
+							<BottomNavigationAction
+								to="/customers"
+								component={Link}
+								label="Customers"
+								icon={<FitnessCenterIcon />}
+							/>
+							<BottomNavigationAction
+								to="/calendar"
+								component={Link}
+								label="Calendar"
+								icon={<TodayIcon />}
+							/>
+						</BottomNavigation>
+					</div>
+				</div>
+			</BrowserRouter>
 		</div>
 	);
 };
+
+const useStyles = makeStyles({
+	root: {
+		width: 2600
+	}
+});
 
 export default App;

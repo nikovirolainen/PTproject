@@ -1,11 +1,6 @@
 import React from "react";
 
-function Calendar() {
-	return (
-		<div>
-			<h1>HELLO</h1>
-		</div>
-	);
-}
-
+const Calendar = () => {
+	return <div>Hello</div>;
+};
 export default Calendar;
