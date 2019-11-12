@@ -6,7 +6,6 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import { lightBlue } from "@material-ui/core/colors";
 
 const Addcustomer = (props) => {
 	const [open, setOpen] = useState(false);
@@ -39,7 +38,7 @@ const Addcustomer = (props) => {
 	};
 
 	return (
-		<div style={{ marginTop: 10, marginBottom: 10, backgroundColor: "pink" }}>
+		<div style={{ marginTop: 1, marginBottom: 1, backgroundColor: "grey" }}>
 			<Button variant="outlined" color="primary" onClick={handleClickOpen}>
 				Add customer
 			</Button>

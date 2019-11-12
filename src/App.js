@@ -6,8 +6,8 @@ import FitnessCenterIcon from "@material-ui/icons/FitnessCenter";
 import TodayIcon from "@material-ui/icons/Today";
 import { Route, BrowserRouter, Switch, Link } from "react-router-dom";
 import "./App.css";
-import Customers from "./Customers";
-import Calendar from "./Calendar";
+import Customers from "./components/Customers";
+import Calendar from "./components/Calendar";
 
 const App = () => {
 	const classes = useStyles();
