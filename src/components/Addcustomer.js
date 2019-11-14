@@ -41,7 +41,12 @@ const Addcustomer = props => {
 
   return (
     <div className={classes.root}>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button
+        variant="outlined"
+        color="primary"
+        onClick={handleClickOpen}
+        className={classes.root}
+      >
         Add customer
       </Button>
       <Dialog

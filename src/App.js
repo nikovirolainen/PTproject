@@ -17,7 +17,7 @@ const App = () => {
     <div>
       <BrowserRouter>
         <div>
-          <div style={{ textAlign: "center", marginTop: 1 }}>
+          <div style={{ textAlign: "center" }}>
             <Switch>
               <Route path="/customers" component={Customers} />
               <Route path="/calendar" component={Calendar} />
@@ -25,14 +25,14 @@ const App = () => {
               <Route render={() => <h1>Page not found</h1>} />
             </Switch>
           </div>
-          <div>
+          <div className={classes.holo}>
             <BottomNavigation
               value={value}
               onChange={(event, newValue) => {
                 setValue(newValue);
               }}
               showLabels
-              className={classes.root}
+              className={classes.holo}
             >
               <BottomNavigationAction
                 to="/customers"
@@ -60,11 +60,14 @@ const useStyles = makeStyles({
   root: {
     background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
     border: 0,
-    borderRadius: 3,
+    borderRadius: 7,
     boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
-    color: "white",
-    height: 48,
-    padding: "0 30px"
+    color: "black",
+    height: 60,
+    padding: "10 30px"
+  },
+  holo: {
+    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)"
   }
 });
 

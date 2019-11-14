@@ -83,9 +83,10 @@ const Customers = () => {
       sortable: true,
       Cell: ({ value }) => (
         <Button
-          size="medium"
+          size="large"
           color="secondary"
           onClick={() => deleteCustomer(value)}
+          className={classes.root}
         >
           Delete
         </Button>
@@ -96,7 +97,12 @@ const Customers = () => {
       filterable: true,
       sortable: true,
       Cell: ({ value }) => (
-        <Button size="medium" color="primary" onClick={() => goToCalender()}>
+        <Button
+          size="large"
+          color="primary"
+          onClick={() => goToCalender()}
+          className={classes.root}
+        >
           Add training
         </Button>
       )
