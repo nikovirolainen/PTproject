@@ -18,12 +18,12 @@ const Calendar = (props) => {
 			response
 				.json()
 				.then((data) => {
-					const formattedTrainings = data.content.map((item) => {
-						const container = {};
-						container.date = moment(item.date).format("YYYY-MM-DD");
-						container.duration = item.duration;
-						container.activity = item.activity;
-						return container;
+					const formattedTrainings = data.content.map((training) => {
+						const calendar = {};
+						calendar.date = moment(training.date).format("YYYY-MM-DD");
+						calendar.duration = training.duration;
+						calendar.activity = training.activity;
+						return calendar;
 					});
 					console.table(formattedTrainings);
 					setTrainings(formattedTrainings);
@@ -37,13 +37,13 @@ const Calendar = (props) => {
 			<FullCalender
 				defaultView="dayGridMonth"
 				plugins={[dayGridPlugin]}
-				height={700}
+				height={1000}
 				aspectRatio={1}
-				events={trainings.map((item) => {
-					const container = {};
-					container.date = item.date;
-					container.title = item.activity;
-					return container;
+				events={trainings.map((training) => {
+					const calendar = {};
+					calendar.date = training.date;
+					calendar.title = training.activity;
+					return calendar;
 				})}
 			/>
 		</div>
