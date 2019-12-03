@@ -7,126 +7,126 @@ import Snackbar from "@material-ui/core/Snackbar";
 import Addcustomer from "./Addcustomer";
 
 const Customers = () => {
-  const classes = useStyles();
-  const [customers, setCustomers] = useState([]);
-  const [open, setOpen] = useState(false);
+	const classes = useStyles();
+	const [customers, setCustomers] = useState([]);
+	const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    fetchCustomers();
-  }, []);
+	useEffect(() => {
+		fetchCustomers();
+	}, []);
 
-  const handleClose = (event, reason) => {
-    setOpen(false);
-  };
-  const fetchCustomers = () => {
-    fetch("https://customerrest.herokuapp.com/api/customers")
-      .then(response => response.json())
-      .then(data => setCustomers(data.content))
-      .catch(err => console.error(err));
-  };
+	const handleClose = (event, reason) => {
+		setOpen(false);
+	};
+	const fetchCustomers = () => {
+		fetch("https://customerrest.herokuapp.com/api/customers")
+			.then((response) => response.json())
+			.then((data) => setCustomers(data.content))
+			.catch((err) => console.error(err));
+	};
 
-  const deleteCustomer = link => {
-    if (window.confirm("Are you sure?")) {
-      fetch(link, { method: "DELETE" })
-        .then(res => fetchCustomers())
-        .then(res => setOpen(true))
-        .catch(err => console.error(err));
-    }
-  };
+	const deleteCustomer = (link) => {
+		if (window.confirm("Are you sure?")) {
+			fetch(link, { method: "DELETE" })
+				.then((res) => fetchCustomers())
+				.then((res) => setOpen(true))
+				.catch((err) => console.error(err));
+		}
+	};
 
-  const goToCalender = () => {};
+	const goToCalender = () => {};
 
-  const saveCustomer = newCustomer => {
-    fetch("https://carstockrest.herokuapp.com/api/customers", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(newCustomer)
-    })
-      .then(res => fetchCustomers())
-      .catch(err => console.error(err));
-  };
+	const saveCustomer = (newCustomer) => {
+		fetch("https://customerrest.herokuapp.com/api/customers", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(newCustomer)
+		})
+			.then((res) => fetchCustomers())
+			.catch((err) => console.error(err));
+	};
 
-  const columns = [
-    {
-      Header: "First name",
-      accessor: "firstname"
-    },
-    {
-      Header: "Last name",
-      accessor: "lastname"
-    },
-    {
-      Header: "Street address",
-      accessor: "streetaddress"
-    },
-    {
-      Header: "Postal code",
-      accessor: "postcode"
-    },
-    {
-      Header: "City",
-      accessor: "city"
-    },
-    {
-      Header: "Email",
-      accessor: "email"
-    },
-    {
-      Header: "Phone",
-      accessor: "phone"
-    },
-    {
-      accessor: "_links.self.href",
-      filterable: true,
-      sortable: true,
-      Cell: ({ value }) => (
-        <Button
-          size="large"
-          color="secondary"
-          onClick={() => deleteCustomer(value)}
-          className={classes.root}
-        >
-          Delete
-        </Button>
-      )
-    },
-    {
-      accessor: "_links.self.href",
-      filterable: true,
-      sortable: true,
-      Cell: ({ value }) => (
-        <Button
-          size="large"
-          color="primary"
-          onClick={() => goToCalender()}
-          className={classes.root}
-        >
-          Add training
-        </Button>
-      )
-    }
-  ];
+	const columns = [
+		{
+			Header: "First name",
+			accessor: "firstname"
+		},
+		{
+			Header: "Last name",
+			accessor: "lastname"
+		},
+		{
+			Header: "Street address",
+			accessor: "streetaddress"
+		},
+		{
+			Header: "Postal code",
+			accessor: "postcode"
+		},
+		{
+			Header: "City",
+			accessor: "city"
+		},
+		{
+			Header: "Email",
+			accessor: "email"
+		},
+		{
+			Header: "Phone",
+			accessor: "phone"
+		},
+		{
+			accessor: "links[0].href",
+			filterable: true,
+			sortable: true,
+			Cell: ({ value }) => (
+				<Button
+					size="large"
+					color="secondary"
+					onClick={() => deleteCustomer(value)}
+					className={classes.root}
+				>
+					Delete
+				</Button>
+			)
+		},
+		{
+			accessor: "_links.self.href",
+			filterable: true,
+			sortable: true,
+			Cell: ({ value }) => (
+				<Button
+					size="large"
+					color="primary"
+					onClick={() => goToCalender()}
+					className={classes.root}
+				>
+					Add training
+				</Button>
+			)
+		}
+	];
 
-  return (
-    <div className={classes.root}>
-      <Addcustomer saveCustomer={saveCustomer} />
-      <ReactTable filterable={true} columns={columns} data={customers} />
-      <Snackbar
-        open={open}
-        autoHideDuration={3000}
-        onClose={handleClose}
-        message="Customer deleted"
-      />
-    </div>
-  );
+	return (
+		<div className={classes.root}>
+			<Addcustomer saveCustomer={saveCustomer} />
+			<ReactTable filterable={true} columns={columns} data={customers} />
+			<Snackbar
+				open={open}
+				autoHideDuration={3000}
+				onClose={handleClose}
+				message="Customer deleted"
+			/>
+		</div>
+	);
 };
 
 const useStyles = makeStyles({
-  root: {
-    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)"
-  }
+	root: {
+		background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)"
+	}
 });
 
 export default Customers;
