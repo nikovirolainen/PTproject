@@ -5,6 +5,7 @@ import "react-table/react-table.css";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import Addcustomer from "./Addcustomer";
+import Addtrainings from "./Addtrainings";
 
 const Customers = () => {
 	const classes = useStyles();
@@ -34,7 +35,29 @@ const Customers = () => {
 		}
 	};
 
-	const goToCalender = () => {};
+	const editCustomer = (editedCustomer) => {
+		fetch("https://customerrest.herokuapp.com/api/customers/111", {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(editedCustomer)
+		})
+			.then((res) => fetchCustomers())
+			.catch((err) => console.error(err));
+	};
+
+	const saveTraining = (newTraining) => {
+		fetch("https://customerrest.herokuapp.com/api/trainings", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(newTraining)
+		})
+			.then((res) => fetchCustomers())
+			.catch((err) => console.error(err));
+	};
 
 	const saveCustomer = (newCustomer) => {
 		fetch("https://customerrest.herokuapp.com/api/customers", {
@@ -79,8 +102,6 @@ const Customers = () => {
 		},
 		{
 			accessor: "links[0].href",
-			filterable: true,
-			sortable: true,
 			Cell: ({ value }) => (
 				<Button
 					size="large"
@@ -93,14 +114,25 @@ const Customers = () => {
 			)
 		},
 		{
-			accessor: "_links.self.href",
-			filterable: true,
-			sortable: true,
+			accessor: "links[1].href",
 			Cell: ({ value }) => (
 				<Button
 					size="large"
 					color="primary"
-					onClick={() => goToCalender()}
+					onClick={() => editCustomer(value)}
+					className={classes.root}
+				>
+					Edit
+				</Button>
+			)
+		},
+		{
+			accessor: "links[2].href",
+			Cell: ({ value }) => (
+				<Button
+					size="large"
+					color="primary"
+					onClick={() => saveTraining(value)}
 					className={classes.root}
 				>
 					Add training
@@ -112,6 +144,7 @@ const Customers = () => {
 	return (
 		<div className={classes.root}>
 			<Addcustomer saveCustomer={saveCustomer} />
+			<Addtrainings saveTraining={saveTraining} />
 			<ReactTable filterable={true} columns={columns} data={customers} />
 			<Snackbar
 				open={open}
