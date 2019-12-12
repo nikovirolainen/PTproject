@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import Addcustomer from "./Addcustomer";
 import Addtrainings from "./Addtrainings";
+import Editcustomer from "./Editcustomer";
 
 const Customers = () => {
 	const classes = useStyles();
@@ -35,13 +36,15 @@ const Customers = () => {
 		}
 	};
 
-	const editCustomer = (editedCustomer) => {
-		fetch("https://customerrest.herokuapp.com/api/customers/111", {
+	const goToCalendar = () => {};
+
+	const editCustomer = (customer, link) => {
+		fetch(link, {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json"
 			},
-			body: JSON.stringify(editedCustomer)
+			body: JSON.stringify(customer)
 		})
 			.then((res) => fetchCustomers())
 			.catch((err) => console.error(err));
@@ -115,27 +118,18 @@ const Customers = () => {
 		},
 		{
 			accessor: "links[1].href",
-			Cell: ({ value }) => (
-				<Button
-					size="large"
-					color="primary"
-					onClick={() => editCustomer(value)}
-					className={classes.root}
-				>
-					Edit
-				</Button>
-			)
+			Cell: (row) => <Editcustomer customer={row.original} updateCustomer={editCustomer} />
 		},
 		{
-			accessor: "links[2].href",
+			accessor: "links[0].href",
 			Cell: ({ value }) => (
 				<Button
 					size="large"
 					color="primary"
-					onClick={() => saveTraining(value)}
+					onClick={() => goToCalendar(value)}
 					className={classes.root}
 				>
-					Add training
+					See trainings
 				</Button>
 			)
 		}
