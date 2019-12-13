@@ -12,22 +12,36 @@ const moment = require("moment");
 const Addtrainings = (props) => {
 	const classes = useStyles();
 	const [open, setOpen] = useState(false);
+	const [customers, setCustomers] = React.useState([]);
 	const [training, setTraining] = useState({
 		activity: "",
 		date: new Date(),
 		duration: ""
 	});
 
-	const handleClickOpen = () => {
-		setOpen(true);
+	const fetchCustomers = () => {
+		fetch("https://customerrest.herokuapp.com/api/customers")
+			.then((response) => response.json())
+			.then((data) => setCustomers(data.content))
+			.catch((err) => console.error(err));
 	};
 
-	const handleClose = () => {
+	const handleClickOpen = () => {
+		setOpen(true);
+		fetchCustomers();
+	};
+
+	const handleClose = (value) => {
 		setOpen(false);
 	};
 
 	const handleChange = (event) => {
 		setTraining({ ...training, [event.target.name]: event.target.value });
+	};
+
+	const handleListItemClick = (value) => {
+		setTraining({ ...training, customer: value.links[0].href });
+		handleClose();
 	};
 
 	const addTraining = () => {
@@ -76,6 +90,26 @@ const Addtrainings = (props) => {
 						name="activity"
 						value={training.activity}
 					/>
+					<TextField
+						id="outlined-basic"
+						select
+						margin="normal"
+						variant="outlined"
+						style={{ marginBottom: 15 }}
+						label="Customer"
+						onChange={(e) => handleChange(e)}
+						name="customer"
+						value={training.activity}
+						SelectProps={{
+							native: true
+						}}
+					>
+						{customers.map((index) => (
+							<option onClick={() => handleListItemClick(index)} key={index}>
+								{index.firstname} / {index.links[0].href}
+							</option>
+						))}
+					</TextField>
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={handleClose} color="primary">

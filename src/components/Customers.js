@@ -8,7 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import Addcustomer from "./Addcustomer";
 import Editcustomer from "./Editcustomer";
 
-const Customers = () => {
+const Customers = (props) => {
 	const classes = useStyles();
 	const [customers, setCustomers] = useState([]);
 	const [open, setOpen] = useState(false);
