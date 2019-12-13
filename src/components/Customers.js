@@ -4,8 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import "react-table/react-table.css";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
+import Grid from "@material-ui/core/Grid";
 import Addcustomer from "./Addcustomer";
-import Addtrainings from "./Addtrainings";
 import Editcustomer from "./Editcustomer";
 
 const Customers = () => {
@@ -48,18 +48,6 @@ const Customers = () => {
 			.catch((err) => console.error(err));
 	};
 
-	const saveTraining = (newTraining) => {
-		fetch("https://customerrest.herokuapp.com/api/trainings", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify(newTraining)
-		})
-			.then((res) => fetchCustomers())
-			.catch((err) => console.error(err));
-	};
-
 	const saveCustomer = (newCustomer) => {
 		fetch("https://customerrest.herokuapp.com/api/customers", {
 			method: "POST",
@@ -71,8 +59,6 @@ const Customers = () => {
 			.then((res) => fetchCustomers())
 			.catch((err) => console.error(err));
 	};
-
-	const goToCalendar = () => {};
 
 	const columns = [
 		{
@@ -123,26 +109,18 @@ const Customers = () => {
 					<Editcustomer customer={row.original} updateCustomer={editCustomer} />
 				</Button>
 			)
-		},
-		{
-			accessor: "links[0].href",
-			Cell: ({ value }) => (
-				<Button
-					size="large"
-					color="primary"
-					onClick={() => goToCalendar(value)}
-					className={classes.root}
-				>
-					Edit trainings
-				</Button>
-			)
 		}
 	];
 
 	return (
 		<div className={classes.root}>
-			<Addcustomer saveCustomer={saveCustomer} />
-			<Addtrainings saveTraining={saveTraining} />
+			<Grid container>
+				<Grid item></Grid>
+			</Grid>
+			<h1 align="canter">Customers</h1>
+			<div align="canter">
+				<Addcustomer saveCustomer={saveCustomer} />
+			</div>
 			<ReactTable filterable={true} columns={columns} data={customers} />
 			<Snackbar
 				open={open}
