@@ -106,7 +106,7 @@ const Addtrainings = (props) => {
 					>
 						{customers.map((index) => (
 							<option onClick={() => handleListItemClick(index)} key={index}>
-								{index.firstname} / {index.links[0].href}
+								{index.links[0].href}
 							</option>
 						))}
 					</TextField>
