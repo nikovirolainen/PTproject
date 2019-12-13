@@ -36,8 +36,6 @@ const Customers = () => {
 		}
 	};
 
-	const goToCalendar = () => {};
-
 	const editCustomer = (customer, link) => {
 		fetch(link, {
 			method: "PUT",
@@ -73,6 +71,8 @@ const Customers = () => {
 			.then((res) => fetchCustomers())
 			.catch((err) => console.error(err));
 	};
+
+	const goToCalendar = () => {};
 
 	const columns = [
 		{
@@ -112,13 +112,17 @@ const Customers = () => {
 					onClick={() => deleteCustomer(value)}
 					className={classes.root}
 				>
-					Delete
+					Delete customer
 				</Button>
 			)
 		},
 		{
-			accessor: "links[1].href",
-			Cell: (row) => <Editcustomer customer={row.original} updateCustomer={editCustomer} />
+			accessor: "links[0].href",
+			Cell: (row) => (
+				<Button className={classes.root} size="small" color="secondary">
+					<Editcustomer customer={row.original} updateCustomer={editCustomer} />
+				</Button>
+			)
 		},
 		{
 			accessor: "links[0].href",
@@ -129,7 +133,7 @@ const Customers = () => {
 					onClick={() => goToCalendar(value)}
 					className={classes.root}
 				>
-					See trainings
+					Edit trainings
 				</Button>
 			)
 		}

@@ -46,37 +46,44 @@ const Addtrainings = (props) => {
 				<DialogContent>
 					<DialogContentText>Fill the training date, time and activity</DialogContentText>
 					<TextField
-						autoFocus
-						margin="dense"
+						id="outlined-basic"
+						margin="normal"
+						variant="outlined"
+						style={{ marginBottom: 15 }}
+						label="Date"
+						onChange={(e) => handleChange(e)}
 						name="date"
 						value={training.date}
-						onChange={(e) => handleChange(e)}
-						label="Date"
-						fullWidth
 					/>
 					<TextField
-						margin="dense"
+						id="outlined-basic"
+						margin="normal"
+						variant="outlined"
+						style={{ marginBottom: 15 }}
+						label="Time"
+						onChange={(e) => handleChange(e)}
 						name="time"
 						value={training.time}
-						onChange={(e) => handleChange(e)}
-						label="Time"
-						fullWidth
 					/>
 					<TextField
-						margin="dense"
+						id="outlined-basic"
+						margin="normal"
+						variant="outlined"
+						style={{ marginBottom: 15 }}
+						label="Activity"
+						onChange={(e) => handleChange(e)}
 						name="activity"
 						value={training.activity}
-						onChange={(e) => handleChange(e)}
-						label="Activity"
-						fullWidth
 					/>
 					<TextField
-						margin="dense"
+						id="outlined-basic"
+						margin="normal"
+						variant="outlined"
+						style={{ marginBottom: 15 }}
+						label="Customer(email)"
+						onChange={(e) => handleChange(e)}
 						name="customer"
 						value={training.customer}
-						onChange={(e) => handleChange(e)}
-						label="Customer(email)"
-						fullWidth
 					/>
 				</DialogContent>
 				<DialogActions>

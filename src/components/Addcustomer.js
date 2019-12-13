@@ -31,7 +31,6 @@ const Addcustomer = (props) => {
 
 	const handleChange = (event) => {
 		setCustomer({ ...customer, [event.target.name]: event.target.value });
-		console.log(customer);
 	};
 
 	const addCustomer = () => {
@@ -49,61 +48,74 @@ const Addcustomer = (props) => {
 				<DialogContent>
 					<DialogContentText>Fill the information for new customer</DialogContentText>
 					<TextField
-						autoFocus
-						margin="dense"
+						id="outlined-basic"
+						margin="normal"
+						variant="outlined"
+						style={{ marginBottom: 15 }}
+						label="First name"
+						onChange={(e) => handleChange(e)}
 						name="firstname"
 						value={customer.firstname}
-						onChange={(e) => handleChange(e)}
-						label="First name"
-						fullWidth
 					/>
 					<TextField
-						margin="dense"
+						id="outlined-basic"
+						margin="normal"
+						variant="outlined"
+						style={{ marginBottom: 15 }}
+						label="Lastname"
+						onChange={(e) => handleChange(e)}
 						name="lastname"
 						value={customer.lastname}
-						onChange={(e) => handleChange(e)}
-						label="Last name"
-						fullWidth
 					/>
 					<TextField
-						margin="dense"
+						id="outlined-basic"
+						margin="normal"
+						variant="outlined"
+						style={{ marginBottom: 15 }}
+						label="Address"
+						onChange={(e) => handleChange(e)}
 						name="streetaddress"
 						value={customer.streetaddress}
-						onChange={(e) => handleChange(e)}
-						label="Street address"
-						fullWidth
 					/>
 					<TextField
-						margin="dense"
+						id="outlined-basic"
+						margin="normal"
+						variant="outlined"
+						style={{ marginBottom: 15 }}
+						label="Postcode"
+						onChange={(e) => handleChange(e)}
 						name="postcode"
 						value={customer.postcode}
-						onChange={(e) => handleChange(e)}
-						label="Postal code"
-						fullWidth
 					/>
 					<TextField
-						margin="dense"
+						id="outlined-basic"
+						margin="normal"
+						variant="outlined"
+						style={{ marginBottom: 15 }}
+						label="City"
+						onChange={(e) => handleChange(e)}
 						name="city"
 						value={customer.city}
-						onChange={(e) => handleChange(e)}
-						label="City"
-						fullWidth
 					/>
 					<TextField
-						margin="dense"
+						id="outlined-basic"
+						margin="normal"
+						variant="outlined"
+						style={{ marginBottom: 15 }}
+						label="Email"
+						onChange={(e) => handleChange(e)}
 						name="email"
 						value={customer.email}
-						onChange={(e) => handleChange(e)}
-						label="Email"
-						fullWidth
 					/>
 					<TextField
-						margin="dense"
+						id="outlined-basic"
+						margin="normal"
+						variant="outlined"
+						style={{ marginBottom: 15 }}
+						label="Phone"
+						onChange={(e) => handleChange(e)}
 						name="phone"
 						value={customer.phone}
-						onChange={(e) => handleChange(e)}
-						label="Phone"
-						fullWidth
 					/>
 				</DialogContent>
 				<DialogActions>
