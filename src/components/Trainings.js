@@ -32,7 +32,6 @@ const Trainings = () => {
 						container.date = moment(item.date).format("YYYY-MM-DD-LT");
 						container.duration = item.duration;
 						container.activity = item.activity;
-						container.customer = item.customer;
 						container.href = item.links[0].href;
 						return container;
 					});
